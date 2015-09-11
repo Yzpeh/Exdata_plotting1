@@ -1,0 +1,13 @@
+setwd("C:/Users/yeekzheng/Downloads")
+## Read data and generate a main data frame
+main_data <- read.csv ("C:/Users/yeekzheng/Downloads/household_power_consumption.txt", sep = ";", na.strings="?")
+main_data <- as.data.frame(main_data)
+## generate sub_set considering the frame time 2007-02-01 to 2007-02-02
+sub_set <- subset(main_data, as.Date(Date,format="%d/%m/%Y") == as.Date("01/02/2007", format="%d/%m/%Y") | 
+                    as.Date(Date,format="%d/%m/%Y") == as.Date("02/02/2007",format="%d/%m/%Y"))
+
+png(file="plot1.png",width=480,height=480,bg=NA,units="px")
+hist(as.numeric(sub_set$Global_active_power), 
+     col="red", main="Global Active Power", xlab="Global Active Power in (kilowatts)", 
+     ylim=c(0,1200))
+dev.off()
